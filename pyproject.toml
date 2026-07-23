@@ -1,5 +1,4 @@
 [tool.uv.workspace]
 members = [
-    "apps/catalog_client",
-    "apps/file-stats-service"
+    "apps/catalog_client"
 ]

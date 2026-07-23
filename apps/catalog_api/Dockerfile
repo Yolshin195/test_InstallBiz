@@ -22,7 +22,7 @@ RUN cargo chef cook --release --recipe-path recipe.json
 COPY . .
 
 # Собираем конкретный бинарник через воркспейс
-RUN cargo build --release --bin test_catalog_api -p test_catalog_api
+RUN cargo build --release --bin catalog_api -p catalog_api
 
 # ЭТАП 3: Финальный легковесный образ для продакшена
 FROM debian:bookworm-slim AS runtime
@@ -35,8 +35,8 @@ RUN apt-get update && apt-get install -y \
 WORKDIR /app
 
 # Копируем бинарник из общей папки target/release воркспейса
-COPY --from=builder /app/target/release/test_catalog_api /app/test_catalog_api
+COPY --from=builder /app/target/release/catalog_api /app/catalog_api
 
 EXPOSE 8080
 
-CMD ["./test_catalog_api"]
+CMD ["./catalog_api"]

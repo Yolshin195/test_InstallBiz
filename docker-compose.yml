@@ -26,7 +26,7 @@ services:
       retries: 10
 
   migrate:
-    build: ./apps/file-stats-service
+    build: ./apps/catalog_client
     env_file: .env
     depends_on:
       postgres:
@@ -34,7 +34,7 @@ services:
     entrypoint: ["alembic", "upgrade", "head"]
 
   web:
-    build: ./apps/file-stats-service
+    build: ./apps/catalog_client
     env_file: .env
     ports:
       - "8000:8000"
@@ -49,13 +49,13 @@ services:
   
 
   catalog_api:
-    build: ./apps/test_catalog_api
+    build: ./apps/catalog_api
     ports:
       - "8333:8333"
-    command: ["./test_catalog_api"]
+    command: ["./catalog_api"]
 
   worker:
-    build: ./apps/file-stats-service
+    build: ./apps/catalog_client
     env_file: .env
     depends_on:
       postgres:
