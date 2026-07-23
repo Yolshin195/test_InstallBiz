@@ -1,0 +1,35 @@
+<h2>Расчёты по {{ selected_count }} выбранным файлам</h2>
+
+<h3>Общая статистика</h3>
+<table class="stats-table">
+    <thead>
+        <tr>
+            {% for digit in "0123456789" %}<th>{{ digit }}</th>{% endfor %}
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            {% for digit in "0123456789" %}<td>{{ stats.total.counts[digit] }}</td>{% endfor %}
+        </tr>
+    </tbody>
+</table>
+
+<h3>Статистика по файлам</h3>
+<table class="stats-table">
+    <thead>
+        <tr>
+            <th>Файл</th>
+            {% for digit in "0123456789" %}<th>{{ digit }}</th>{% endfor %}
+        </tr>
+    </thead>
+    <tbody>
+        {% for name, file_stats in stats.per_file.items() %}
+        <tr>
+            <td>{{ name }}</td>
+            {% for digit in "0123456789" %}<td>{{ file_stats.counts[digit] }}</td>{% endfor %}
+        </tr>
+        {% else %}
+        <tr><td colspan="11">Файлы не выбраны.</td></tr>
+        {% endfor %}
+    </tbody>
+</table>

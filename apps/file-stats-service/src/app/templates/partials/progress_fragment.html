@@ -1,0 +1,20 @@
+{% if progress.status == "idle" %}
+    <p>Ожидание старта воркера...</p>
+{% elif progress.status == "running" %}
+    <p>
+        Статус: <strong>идёт скачивание</strong><br>
+        Получено {{ progress.total_known }} названий файлов, скачано {{ progress.downloaded }} из {{ progress.total_known }}
+    </p>
+    <progress value="{{ progress.downloaded }}" max="{{ progress.total_known if progress.total_known > 0 else 1 }}"></progress>
+{% elif progress.status == "completed" %}
+    <p>
+        ✅ Готово. Скачано файлов: <strong>{{ progress.downloaded }}</strong><br>
+        Завершено (НСК): {{ finished_local }}
+    </p>
+    <p><a href="/files">Перейти к списку файлов →</a></p>
+{% elif progress.status == "error" %}
+    <p>
+        ❌ Ошибка скачивания: {{ progress.message }}<br>
+        Скачано до сбоя: {{ progress.downloaded }} из {{ progress.total_known }}
+    </p>
+{% endif %}

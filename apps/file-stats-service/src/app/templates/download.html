@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}Скачивание каталога{% endblock %}
+{% block content %}
+    <h1>Скачивание каталога файлов</h1>
+    <p>Нажмите кнопку, чтобы запустить скачивание всего каталога через внешнее API.
+       Процесс идёт в фоне (Celery worker) и продолжается, пока каталог не будет скачан полностью.</p>
+
+    <button
+        hx-post="/download/start"
+        hx-target="#progress-area"
+        hx-swap="innerHTML"
+        class="btn btn-primary">
+        Скачать данные
+    </button>
+
+    <div id="progress-area"></div>
+{% endblock %}

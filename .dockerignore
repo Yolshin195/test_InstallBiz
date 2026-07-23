@@ -1,3 +1,14 @@
+Target/
+.git
+.github/
+*.log
+.env
+.DS_Store
+Dockerfile
+docker-compose.yml
+.dockerignore
+
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[codz]
@@ -5,8 +16,6 @@ __pycache__/
 
 # C extensions
 *.so
-
-.DS_Store
 
 # Distribution / packaging
 .Python

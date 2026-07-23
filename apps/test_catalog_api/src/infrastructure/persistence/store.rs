@@ -57,7 +57,7 @@ impl Store {
         let mut assigned = Vec::with_capacity(count);
         for _ in 0..count {
             let name = format!("{}.txt", Uuid::new_v4());
-            let content = generate_file_content(&name);
+            let content = generate_file_content();
             inner
                 .files
                 .entry(name.clone())
@@ -157,42 +157,10 @@ impl Store {
 
 /// Генерирует псевдослучайное текстовое содержимое файла — набор из
 /// нескольких предложений на основе небольшого банка слов.
-fn generate_file_content(name: &str) -> Vec<u8> {
-    const WORDS: &[&str] = &[
-        "lorem", "ipsum", "dolor", "sit", "amet", "consectetur", "adipiscing", "elit", "sed",
-        "do", "eiusmod", "tempor", "incididunt", "ut", "labore", "et", "dolore", "magna",
-        "aliqua", "candidate", "file", "service", "test", "task", "download", "archive",
-        "catalog", "random", "content", "sample", "data",
-    ];
-
+fn generate_file_content() -> Vec<u8> {
     let mut rng = rand::thread_rng();
-    let sentence_count = rng.gen_range(3..=8);
-    let mut text = format!("# {name}\n\n");
 
-    for _ in 0..sentence_count {
-        let word_count = rng.gen_range(6..=14);
-        let mut sentence: Vec<&str> = (0..word_count)
-            .map(|_| WORDS[rng.gen_range(0..WORDS.len())])
-            .collect();
-        if let Some(first) = sentence.first_mut() {
-            let capitalized = capitalize(first);
-            text.push_str(&capitalized);
-            sentence.remove(0);
-        }
-        for word in sentence {
-            text.push(' ');
-            text.push_str(word);
-        }
-        text.push_str(".\n");
-    }
+   let numbers: String = (0..500).map(|_| rng.gen_range(0..=10).to_string()).collect();
 
-    text.into_bytes()
-}
-
-fn capitalize(word: &str) -> String {
-    let mut chars = word.chars();
-    match chars.next() {
-        Some(first) => first.to_uppercase().collect::<String>() + chars.as_str(),
-        None => String::new(),
-    }
+    numbers.into_bytes()
 }

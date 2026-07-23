@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}File Stats Service{% endblock %}</title>
+    <script src="https://unpkg.com/htmx.org@1.9.12"></script>
+    <script src="https://unpkg.com/htmx.org/dist/ext/sse.js"></script>
+    <link rel="stylesheet" href="/static/app.css">
+</head>
+<body>
+    <nav class="nav">
+        <a href="/download">Скачивание</a>
+        <a href="/files">Файлы и расчёты</a>
+    </nav>
+    <main class="container">
+        {% block content %}{% endblock %}
+    </main>
+</body>
+</html>

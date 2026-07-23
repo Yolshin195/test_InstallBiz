@@ -1,0 +1,43 @@
+<p>Всего скачано файлов: <strong>{{ files_page.total }}</strong></p>
+
+<label>
+    <input type="checkbox" onclick="toggleSelectPage(this)">
+    Выбрать все на этой странице
+</label>
+
+<table class="files-table">
+    <thead>
+        <tr>
+            <th></th>
+            <th>Имя файла</th>
+            <th>Время скачивания</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for file in files_page.items %}
+        <tr>
+            <td><input type="checkbox" name="file_names" value="{{ file.name }}"></td>
+            <td>{{ file.name }}</td>
+            <td>{{ file.downloaded_at }}</td>
+        </tr>
+        {% else %}
+        <tr><td colspan="3">Пока ничего не скачано.</td></tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<nav class="pagination">
+    {% if files_page.page > 1 %}
+        <a href="#"
+           hx-get="/files/table?page={{ files_page.page - 1 }}"
+           hx-target="#files-table-container"
+           hx-swap="innerHTML">« Назад</a>
+    {% endif %}
+    <span>Страница {{ files_page.page }} из {{ files_page.total_pages }}</span>
+    {% if files_page.page < files_page.total_pages %}
+        <a href="#"
+           hx-get="/files/table?page={{ files_page.page + 1 }}"
+           hx-target="#files-table-container"
+           hx-swap="innerHTML">Вперёд »</a>
+    {% endif %}
+</nav>

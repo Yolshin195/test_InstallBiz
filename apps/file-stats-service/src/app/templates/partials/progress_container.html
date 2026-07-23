@@ -1,0 +1,6 @@
+<div hx-ext="sse" sse-connect="/download/progress/stream/{{ session_id }}">
+    <p>Время старта (НСК): <strong>{{ started_local }}</strong></p>
+    <div sse-swap="message" hx-swap="innerHTML">
+        <p>Инициализация...</p>
+    </div>
+</div>

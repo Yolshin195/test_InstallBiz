@@ -49,7 +49,7 @@ impl AppConfig {
 
         Self {
             host: env::var("HOST").unwrap_or_else(|_| "0.0.0.0".to_string()),
-            port: env_or("PORT", 5050u16),
+            port: env_or("PORT", 8333u16),
 
             admin_token,
             admin_token_is_default,

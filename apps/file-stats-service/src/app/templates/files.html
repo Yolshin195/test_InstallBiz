@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block title %}Скачанные файлы{% endblock %}
+{% block content %}
+    <h1>Скачанные файлы</h1>
+
+    <form id="stats-form"
+          hx-post="/files/compute-stats"
+          hx-target="#stats-area"
+          hx-swap="innerHTML">
+
+        <label class="select-all-overall">
+            <input type="checkbox" name="select_all" value="true">
+            Выбрать вообще все скачанные файлы (во всех страницах)
+        </label>
+
+        <div id="files-table-container">
+            {% include "partials/files_table.html" %}
+        </div>
+
+        <button type="submit" class="btn btn-primary">Произвести расчёты</button>
+    </form>
+
+    <div id="stats-area"></div>
+
+    <script>
+        function toggleSelectPage(checkbox) {
+            document.querySelectorAll('#files-table-container input[name="file_names"]')
+                .forEach(cb => { cb.checked = checkbox.checked; });
+        }
+    </script>
+{% endblock %}
